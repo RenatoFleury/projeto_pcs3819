@@ -1,0 +1,23 @@
+[
+    {
+        "id": "905ab3e1cb345353",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Formata demanda da base",
+        "func": "const data = [];\nconst labels = [];\n\nfor (let i = 0; i < msg.payload.length; i++) {\n    const currentUsage = msg.payload[i]['potencia_aparente_total']/1000;\n    data.push(currentUsage);\n    \n    const label = msg.payload[i]['timestamp'];\n    labels.push(label);\n};\n\nmsg.payload = {\n    data, labels\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 800,
+        "wires": [
+            [
+                "60a2ba5d671afa37",
+                "37e3793d747afa07"
+            ]
+        ]
+    }
+]

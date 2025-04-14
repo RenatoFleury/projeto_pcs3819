@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "node-red": "^4.0.9",
+    "node-red-contrib-postgresql": "^0.15.1",
+    "node-red-dashboard": "^3.6.5"
+  }
+}
