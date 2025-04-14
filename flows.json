@@ -1,5 +1,427 @@
 [
     {
+        "id": "6d15e71edab97d7f",
+        "type": "tab",
+        "label": "Mineração Bitocoin",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "bca9a62e3067e9cd",
+        "type": "mqtt in",
+        "z": "6d15e71edab97d7f",
+        "name": "Dados",
+        "topic": "garsoft/dev/je05/dados",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "cd68d6a99a350091",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "ac8de5bf9ffa0eae",
+                "82bbab6fb54ad46b"
+            ]
+        ]
+    },
+    {
+        "id": "ac8de5bf9ffa0eae",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Calcula Wh instantaneo",
+        "func": "const instantUsage =  msg.payload.DATA.PT/(1800);\nmsg.payload = instantUsage.toFixed(2);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 260,
+        "wires": [
+            [
+                "0b9d4a78362d897b",
+                "eee5d49945b86430",
+                "9ae5a342e75c8a10"
+            ]
+        ]
+    },
+    {
+        "id": "0b9d4a78362d897b",
+        "type": "debug",
+        "z": "6d15e71edab97d7f",
+        "name": "Consumo elétrico instananeo",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 760,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "eee5d49945b86430",
+        "type": "ui_chart",
+        "z": "6d15e71edab97d7f",
+        "name": "Consumo elétrico instantaneo",
+        "group": "c58ceaaef74b6204",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Consumo elétrico instantaneo (Wh)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 770,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9ae5a342e75c8a10",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Multiplica por tarifa elétrica",
+        "func": "const price = msg.payload/1000 * 0.649;\nmsg.payload = price;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 340,
+        "wires": [
+            [
+                "16fbc01db46b5370"
+            ]
+        ]
+    },
+    {
+        "id": "16fbc01db46b5370",
+        "type": "ui_chart",
+        "z": "6d15e71edab97d7f",
+        "name": "Custo elétrico instantaneo",
+        "group": "6535452ab6c2a58b",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Custo elétrico instantaneo (R$)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "0.1",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1070,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "87f0092df9ee4e10",
+        "type": "inject",
+        "z": "6d15e71edab97d7f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 160,
+        "y": 420,
+        "wires": [
+            [
+                "0b67747b2fad586a",
+                "b5f5a482969e1501",
+                "58f75b74032acb31"
+            ]
+        ]
+    },
+    {
+        "id": "2e499664d8c523f4",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Formata consumo da base",
+        "func": "const data = [];\nconst labels = [];\n\nfor (let i = 1; i < msg.payload.length; i++) {\n    const lastUsage = msg.payload[i -1]['consumo_ativo_acumulado_total'];\n    const currentUsage = msg.payload[i]['consumo_ativo_acumulado_total'];\n    data.push((currentUsage - lastUsage)/1000);\n    \n    const label = msg.payload[i]['timestamp'];\n    labels.push(label);\n};\n\nmsg.payload = {\n    data, labels\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 600,
+        "wires": [
+            [
+                "30fabcae66f47908",
+                "a76ab5ea1e2ea7a2"
+            ]
+        ]
+    },
+    {
+        "id": "30fabcae66f47908",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Calcular preço com tarifa elétrica",
+        "func": "const prices = msg.payload['data'].map((d) => d * 0.649);\n\nconst data = [[]];\nconst labels = [];\nfor (let i = 0; i < prices.length; i++) {\n    const obj = {\n        \"x\": msg.payload['labels'][i],\n        \"y\": prices[i],\n    }\n    data[0].push(obj);\n}\n\nconst chartObject = [{\n    \"series\": ['Electric Cost'],\n    \"data\": data,\n    \"labels\": [''],\n}]\nmsg.payload = chartObject;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 640,
+        "wires": [
+            [
+                "5e706ec65327b460"
+            ]
+        ]
+    },
+    {
+        "id": "5e706ec65327b460",
+        "type": "ui_chart",
+        "z": "6d15e71edab97d7f",
+        "name": "Custo elétrico levantado",
+        "group": "dffd313782b9b92f",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Custo elétrico levantado (R$)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1470,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a76ab5ea1e2ea7a2",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Formata consumo elétrico para gráfico",
+        "func": "const data = [[]];\nconst labels = [];\nfor (let i = 0; i < msg.payload['labels'].length; i++) {\n    const obj = {\n        \"x\": msg.payload['labels'][i],\n        \"y\": msg.payload['data'][i],\n    }\n    data[0].push(obj);\n}\n\nconst chartObject = [{\n    \"series\": ['Electric Usage'],\n    \"data\": data,\n    \"labels\": [''],\n}]\nmsg.payload = chartObject;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1110,
+        "y": 540,
+        "wires": [
+            [
+                "39d9d57bbcd4d737"
+            ]
+        ]
+    },
+    {
+        "id": "39d9d57bbcd4d737",
+        "type": "ui_chart",
+        "z": "6d15e71edab97d7f",
+        "name": "Consumo elétrico levantado",
+        "group": "8b33cab01c0a942e",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Consumo elétrico levantado (kWh)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1460,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "82bbab6fb54ad46b",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Pega potência total W",
+        "func": "const instantUsage =  msg.payload.DATA.PT;\nmsg.payload = instantUsage;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 100,
+        "wires": [
+            [
+                "4ca2e275868f86d3",
+                "77157801cb50d129"
+            ]
+        ]
+    },
+    {
+        "id": "4ca2e275868f86d3",
+        "type": "ui_chart",
+        "z": "6d15e71edab97d7f",
+        "name": "Demanda elétrica",
+        "group": "c58ceaaef74b6204",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Demanda elétrica (W)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 710,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "905ab3e1cb345353",
         "type": "function",
         "z": "6d15e71edab97d7f",
@@ -19,5 +441,698 @@
                 "37e3793d747afa07"
             ]
         ]
+    },
+    {
+        "id": "60a2ba5d671afa37",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Formata demanda elétrica para gráfico",
+        "func": "const data = [[]];\nconst labels = [];\nfor (let i = 0; i < msg.payload['data'].length; i++) {\n    const obj = {\n        \"x\": msg.payload['labels'][i],\n        \"y\": msg.payload['data'][i],\n    }\n    data[0].push(obj);\n}\n\nconst chartObject = [{\n    \"series\": ['Electric Demand'],\n    \"data\": data,\n    \"labels\": [''],\n}]\nmsg.payload = chartObject;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1110,
+        "y": 800,
+        "wires": [
+            [
+                "345d10982d019bd2"
+            ]
+        ]
+    },
+    {
+        "id": "345d10982d019bd2",
+        "type": "ui_chart",
+        "z": "6d15e71edab97d7f",
+        "name": "Demanda elétrica levantada",
+        "group": "8b33cab01c0a942e",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "label": "Demanda elétrica levantada (kW)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1460,
+        "y": 800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e7f8ae9a1877cfbf",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Calcula consumo total do período",
+        "func": "const lastIndex = msg.payload.length - 1;\n\nconst finalUsage = msg.payload[lastIndex]['consumo_ativo_acumulado_total'];\nconst initialUsage = msg.payload[0]['consumo_ativo_acumulado_total'];\n\nmsg.payload = (finalUsage - initialUsage)/1000;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 440,
+        "wires": [
+            [
+                "d86301267b4c10ad",
+                "3f721abf4f602be0"
+            ]
+        ]
+    },
+    {
+        "id": "d86301267b4c10ad",
+        "type": "ui_text",
+        "z": "6d15e71edab97d7f",
+        "group": "8b33cab01c0a942e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Consumo elétrico total",
+        "label": "Consumo elétrico total",
+        "format": "{{msg.payload}} kWh",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1120,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "3f721abf4f602be0",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Calcula preço total",
+        "func": "msg.payload = (msg.payload * 0.649).toFixed(2);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1130,
+        "y": 420,
+        "wires": [
+            [
+                "3c51638d23d58e16"
+            ]
+        ]
+    },
+    {
+        "id": "3c51638d23d58e16",
+        "type": "ui_text",
+        "z": "6d15e71edab97d7f",
+        "group": "dffd313782b9b92f",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Custo elétrico total",
+        "label": "Custo elétrico total",
+        "format": "R$ {{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1430,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "2a9a3d79f54c0e6a",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Formata consumo diário da base",
+        "func": "const data = [];\nconst labels = [];\n\nfor (let i = 0; i < msg.payload.length; i++) {\n    const dailyUsage = (msg.payload[i]['consumo_total'])/1000;\n    data.push(dailyUsage);\n\n    const date = new Date(msg.payload[i]['dia']);\n    const formattedDate = date.toLocaleDateString(\"pt-BR\", {\n        day: \"2-digit\", month: \"2-digit\", year: \"2-digit\"\n    });\n    labels.push(formattedDate);\n};\n\nmsg.payload = {\n    data, labels\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 920,
+        "wires": [
+            [
+                "a939d195b9c90efd",
+                "19a9165e871b533c"
+            ]
+        ]
+    },
+    {
+        "id": "a939d195b9c90efd",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Formata consumo diário para gráfico",
+        "func": "const barObject = [{\n    \"series\": ['Daily electric Usage'],\n    \"data\": [msg.payload['data']],\n    \"labels\": msg.payload['labels'],\n}]\nmsg.payload = barObject;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1130,
+        "y": 960,
+        "wires": [
+            [
+                "ab416e365992d31a"
+            ]
+        ]
+    },
+    {
+        "id": "ab416e365992d31a",
+        "type": "ui_chart",
+        "z": "6d15e71edab97d7f",
+        "name": "Consumo elétrico diário",
+        "group": "8b33cab01c0a942e",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "Consumo elétrico diário (kWh)",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1450,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "19a9165e871b533c",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Calcula preço diário para gráfico",
+        "func": "const data = msg.payload['data'].map((data) => data * 0.649);\n\nconst barObject = [{\n    \"series\": ['Daily electric Usage'],\n    \"data\": [data],\n    \"labels\": msg.payload['labels'],\n}]\nmsg.payload = barObject;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1130,
+        "y": 900,
+        "wires": [
+            [
+                "8ab0cef169777908"
+            ]
+        ]
+    },
+    {
+        "id": "8ab0cef169777908",
+        "type": "ui_chart",
+        "z": "6d15e71edab97d7f",
+        "name": "Custo elétrico diário",
+        "group": "dffd313782b9b92f",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "Custo elétrico diário (R$)",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1440,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "37e3793d747afa07",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Calcula utilização dos servidores",
+        "func": "const usageRate = msg.payload['data'].map((p) => {\n    return (p/2.2 * 100);\n});\n\nconst data = [[]];\nconst labels = [];\nfor (let i = 0; i < usageRate.length; i++) {\n    const obj = {\n        \"x\": msg.payload['labels'][i],\n        \"y\": usageRate[i],\n    }\n    data[0].push(obj);\n}\n\nconst chartObject = [{\n    \"series\": ['Electric Cost'],\n    \"data\": data,\n    \"labels\": [''],\n}]\nmsg.payload = chartObject;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1120,
+        "y": 740,
+        "wires": [
+            [
+                "d52b40ae83dd86ef"
+            ]
+        ]
+    },
+    {
+        "id": "d52b40ae83dd86ef",
+        "type": "ui_chart",
+        "z": "6d15e71edab97d7f",
+        "name": "Utilização das máquinas levantada",
+        "group": "dffd313782b9b92f",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "label": "Utilização das máquinas levantada (%)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1480,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "77157801cb50d129",
+        "type": "function",
+        "z": "6d15e71edab97d7f",
+        "name": "Calcula utilização dos servidores",
+        "func": "msg.payload = msg.payload/2200 * 100;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 40,
+        "wires": [
+            [
+                "6bf1162bf47ec8fc"
+            ]
+        ]
+    },
+    {
+        "id": "6bf1162bf47ec8fc",
+        "type": "ui_chart",
+        "z": "6d15e71edab97d7f",
+        "name": "Utilização das Máquinas instantânea",
+        "group": "6535452ab6c2a58b",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Utilização das Máquinas instantânea (%)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1170,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0b67747b2fad586a",
+        "type": "postgresql",
+        "z": "6d15e71edab97d7f",
+        "name": "",
+        "query": "SELECT consumo_ativo_acumulado_total, timestamp\nFROM consumo\nWHERE timestamp >= NOW() - INTERVAL '30 days'\nORDER BY timestamp ASC;\n",
+        "postgreSQLConfig": "8509a4afc33ecbdf",
+        "split": false,
+        "rowsPerMsg": "",
+        "outputs": 1,
+        "x": 430,
+        "y": 420,
+        "wires": [
+            [
+                "e7f8ae9a1877cfbf",
+                "2e499664d8c523f4",
+                "5a732790dfb70bce"
+            ]
+        ]
+    },
+    {
+        "id": "b5f5a482969e1501",
+        "type": "postgresql",
+        "z": "6d15e71edab97d7f",
+        "name": "",
+        "query": "SELECT potencia_aparente_total, timestamp\nFROM demanda\nWHERE timestamp >= NOW() - INTERVAL '30 days'\nORDER BY timestamp ASC;\n",
+        "postgreSQLConfig": "8509a4afc33ecbdf",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 430,
+        "y": 680,
+        "wires": [
+            [
+                "905ab3e1cb345353",
+                "99eab9eb92df3ef3"
+            ]
+        ]
+    },
+    {
+        "id": "58f75b74032acb31",
+        "type": "postgresql",
+        "z": "6d15e71edab97d7f",
+        "name": "",
+        "query": "SELECT \n    DATE(timestamp) AS dia, \n    MAX(consumo_ativo_acumulado_total) - MIN(consumo_ativo_acumulado_total) AS consumo_total\nFROM consumo\nWHERE timestamp >= NOW() - INTERVAL '30 days'\nGROUP BY dia\nORDER BY dia ASC;\n",
+        "postgreSQLConfig": "8509a4afc33ecbdf",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 430,
+        "y": 860,
+        "wires": [
+            [
+                "2a9a3d79f54c0e6a"
+            ]
+        ]
+    },
+    {
+        "id": "5a732790dfb70bce",
+        "type": "debug",
+        "z": "6d15e71edab97d7f",
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 460,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "99eab9eb92df3ef3",
+        "type": "debug",
+        "z": "6d15e71edab97d7f",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 440,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "a47d70883270129c",
+        "type": "ui_spacer",
+        "z": "6d15e71edab97d7f",
+        "name": "spacer",
+        "group": "8b33cab01c0a942e",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "c0049f79d7000543",
+        "type": "ui_spacer",
+        "z": "6d15e71edab97d7f",
+        "name": "spacer",
+        "group": "8b33cab01c0a942e",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "846f86f6021b9d8f",
+        "type": "ui_spacer",
+        "z": "6d15e71edab97d7f",
+        "name": "spacer",
+        "group": "dffd313782b9b92f",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "51bff128f286a253",
+        "type": "ui_spacer",
+        "z": "6d15e71edab97d7f",
+        "name": "spacer",
+        "group": "dffd313782b9b92f",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "caa17c0cad57353a",
+        "type": "ui_spacer",
+        "z": "6d15e71edab97d7f",
+        "name": "spacer",
+        "group": "c58ceaaef74b6204",
+        "order": 2,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "29a3a41b25aef56c",
+        "type": "ui_spacer",
+        "z": "6d15e71edab97d7f",
+        "name": "spacer",
+        "group": "6535452ab6c2a58b",
+        "order": 2,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "cd68d6a99a350091",
+        "type": "mqtt-broker",
+        "name": "Broker Labsoft",
+        "broker": "143.107.102.8",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "c58ceaaef74b6204",
+        "type": "ui_group",
+        "name": "Demanda e Consumo elétrico",
+        "tab": "b19bf680b37b8e71",
+        "order": 2,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6535452ab6c2a58b",
+        "type": "ui_group",
+        "name": "Custo e Utilização das máquinas",
+        "tab": "b19bf680b37b8e71",
+        "order": 2,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "dffd313782b9b92f",
+        "type": "ui_group",
+        "name": "Custo e Utilização das máquinas",
+        "tab": "0b98f02db50640ae",
+        "order": 2,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8b33cab01c0a942e",
+        "type": "ui_group",
+        "name": "Demanda e Consumo elétrico",
+        "tab": "0b98f02db50640ae",
+        "order": 1,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8509a4afc33ecbdf",
+        "type": "postgreSQLConfig",
+        "name": "BaseDados",
+        "host": "143.107.102.8",
+        "hostFieldType": "str",
+        "port": 5432,
+        "portFieldType": "num",
+        "database": "data-energia",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": 10,
+        "maxFieldType": "num",
+        "idle": 1000,
+        "idleFieldType": "num",
+        "connectionTimeout": 10000,
+        "connectionTimeoutFieldType": "num",
+        "user": "leitor",
+        "userFieldType": "str",
+        "password": "garsoftData2024",
+        "passwordFieldType": "str"
+    },
+    {
+        "id": "b19bf680b37b8e71",
+        "type": "ui_tab",
+        "name": "Mineração de Bitcoin - Tempo real",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "0b98f02db50640ae",
+        "type": "ui_tab",
+        "name": "Mineração de Bitcoin - Levantamentos",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
     }
 ]
