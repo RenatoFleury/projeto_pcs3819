@@ -8,6 +8,280 @@
         "env": []
     },
     {
+        "id": "cd68d6a99a350091",
+        "type": "mqtt-broker",
+        "name": "Broker Labsoft",
+        "broker": "143.107.102.8",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "8509a4afc33ecbdf",
+        "type": "postgreSQLConfig",
+        "name": "BaseDados",
+        "host": "143.107.102.8",
+        "hostFieldType": "str",
+        "port": 5432,
+        "portFieldType": "num",
+        "database": "data-energia",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": 10,
+        "maxFieldType": "num",
+        "idle": 1000,
+        "idleFieldType": "num",
+        "connectionTimeout": 10000,
+        "connectionTimeoutFieldType": "num",
+        "user": "leitor",
+        "userFieldType": "str",
+        "password": "garsoftData2024",
+        "passwordFieldType": "str"
+    },
+    {
+        "id": "b19bf680b37b8e71",
+        "type": "ui_tab",
+        "name": "Mineração de Bitcoin - Tempo real",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "0b98f02db50640ae",
+        "type": "ui_tab",
+        "name": "Mineração de Bitcoin - Levantamentos",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c58ceaaef74b6204",
+        "type": "ui_group",
+        "name": "Demanda e Consumo elétrico",
+        "tab": "b19bf680b37b8e71",
+        "order": 2,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6535452ab6c2a58b",
+        "type": "ui_group",
+        "name": "Custo e Utilização das máquinas",
+        "tab": "b19bf680b37b8e71",
+        "order": 2,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "dffd313782b9b92f",
+        "type": "ui_group",
+        "name": "Custo e Utilização das máquinas",
+        "tab": "0b98f02db50640ae",
+        "order": 2,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8b33cab01c0a942e",
+        "type": "ui_group",
+        "name": "Demanda e Consumo elétrico",
+        "tab": "0b98f02db50640ae",
+        "order": 1,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a47d70883270129c",
+        "type": "ui_spacer",
+        "z": "6d15e71edab97d7f",
+        "name": "spacer",
+        "group": "8b33cab01c0a942e",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "c0049f79d7000543",
+        "type": "ui_spacer",
+        "z": "6d15e71edab97d7f",
+        "name": "spacer",
+        "group": "8b33cab01c0a942e",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "846f86f6021b9d8f",
+        "type": "ui_spacer",
+        "z": "6d15e71edab97d7f",
+        "name": "spacer",
+        "group": "dffd313782b9b92f",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "51bff128f286a253",
+        "type": "ui_spacer",
+        "z": "6d15e71edab97d7f",
+        "name": "spacer",
+        "group": "dffd313782b9b92f",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "caa17c0cad57353a",
+        "type": "ui_spacer",
+        "z": "6d15e71edab97d7f",
+        "name": "spacer",
+        "group": "c58ceaaef74b6204",
+        "order": 2,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "29a3a41b25aef56c",
+        "type": "ui_spacer",
+        "z": "6d15e71edab97d7f",
+        "name": "spacer",
+        "group": "6535452ab6c2a58b",
+        "order": 2,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "6ffba55c1f3fdf3e",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
         "id": "bca9a62e3067e9cd",
         "type": "mqtt in",
         "z": "6d15e71edab97d7f",
@@ -956,183 +1230,5 @@
         "x": 440,
         "y": 760,
         "wires": []
-    },
-    {
-        "id": "a47d70883270129c",
-        "type": "ui_spacer",
-        "z": "6d15e71edab97d7f",
-        "name": "spacer",
-        "group": "8b33cab01c0a942e",
-        "order": 3,
-        "width": 1,
-        "height": 1
-    },
-    {
-        "id": "c0049f79d7000543",
-        "type": "ui_spacer",
-        "z": "6d15e71edab97d7f",
-        "name": "spacer",
-        "group": "8b33cab01c0a942e",
-        "order": 5,
-        "width": 1,
-        "height": 1
-    },
-    {
-        "id": "846f86f6021b9d8f",
-        "type": "ui_spacer",
-        "z": "6d15e71edab97d7f",
-        "name": "spacer",
-        "group": "dffd313782b9b92f",
-        "order": 5,
-        "width": 1,
-        "height": 1
-    },
-    {
-        "id": "51bff128f286a253",
-        "type": "ui_spacer",
-        "z": "6d15e71edab97d7f",
-        "name": "spacer",
-        "group": "dffd313782b9b92f",
-        "order": 3,
-        "width": 1,
-        "height": 1
-    },
-    {
-        "id": "caa17c0cad57353a",
-        "type": "ui_spacer",
-        "z": "6d15e71edab97d7f",
-        "name": "spacer",
-        "group": "c58ceaaef74b6204",
-        "order": 2,
-        "width": 1,
-        "height": 1
-    },
-    {
-        "id": "29a3a41b25aef56c",
-        "type": "ui_spacer",
-        "z": "6d15e71edab97d7f",
-        "name": "spacer",
-        "group": "6535452ab6c2a58b",
-        "order": 2,
-        "width": 1,
-        "height": 1
-    },
-    {
-        "id": "cd68d6a99a350091",
-        "type": "mqtt-broker",
-        "name": "Broker Labsoft",
-        "broker": "143.107.102.8",
-        "port": 1883,
-        "clientid": "",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": 4,
-        "keepalive": 60,
-        "cleansession": true,
-        "autoUnsubscribe": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthRetain": "false",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closeRetain": "false",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willRetain": "false",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
-    },
-    {
-        "id": "c58ceaaef74b6204",
-        "type": "ui_group",
-        "name": "Demanda e Consumo elétrico",
-        "tab": "b19bf680b37b8e71",
-        "order": 2,
-        "disp": true,
-        "width": 12,
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "6535452ab6c2a58b",
-        "type": "ui_group",
-        "name": "Custo e Utilização das máquinas",
-        "tab": "b19bf680b37b8e71",
-        "order": 2,
-        "disp": true,
-        "width": 12,
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "dffd313782b9b92f",
-        "type": "ui_group",
-        "name": "Custo e Utilização das máquinas",
-        "tab": "0b98f02db50640ae",
-        "order": 2,
-        "disp": true,
-        "width": 12,
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "8b33cab01c0a942e",
-        "type": "ui_group",
-        "name": "Demanda e Consumo elétrico",
-        "tab": "0b98f02db50640ae",
-        "order": 1,
-        "disp": true,
-        "width": 12,
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "8509a4afc33ecbdf",
-        "type": "postgreSQLConfig",
-        "name": "BaseDados",
-        "host": "143.107.102.8",
-        "hostFieldType": "str",
-        "port": 5432,
-        "portFieldType": "num",
-        "database": "data-energia",
-        "databaseFieldType": "str",
-        "ssl": "false",
-        "sslFieldType": "bool",
-        "applicationName": "",
-        "applicationNameType": "str",
-        "max": 10,
-        "maxFieldType": "num",
-        "idle": 1000,
-        "idleFieldType": "num",
-        "connectionTimeout": 10000,
-        "connectionTimeoutFieldType": "num",
-        "user": "leitor",
-        "userFieldType": "str",
-        "password": "garsoftData2024",
-        "passwordFieldType": "str"
-    },
-    {
-        "id": "b19bf680b37b8e71",
-        "type": "ui_tab",
-        "name": "Mineração de Bitcoin - Tempo real",
-        "icon": "dashboard",
-        "order": 1,
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "0b98f02db50640ae",
-        "type": "ui_tab",
-        "name": "Mineração de Bitcoin - Levantamentos",
-        "icon": "dashboard",
-        "order": 2,
-        "disabled": false,
-        "hidden": false
     }
 ]
