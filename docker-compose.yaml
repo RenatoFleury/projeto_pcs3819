@@ -2,7 +2,8 @@ version: "3.8"
 
 services:
   nodered:
-    build: .
+    image: guicastelo/nodered-automacao:latest
+    container_name: node-red-bitcoin
     ports:
       - "1880:1880"
     volumes:
