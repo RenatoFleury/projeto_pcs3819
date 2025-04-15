@@ -25,7 +25,7 @@ npm install
 - Execute o Node-Red:
 
 ```bash
-npx node-red
+npx node-red --settings ./settings.js
 ```
 
 - Abra o Node-RED no navegador (geralmente em `http://localhost:1880`)

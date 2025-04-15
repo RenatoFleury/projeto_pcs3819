@@ -1,18 +1,10 @@
-# Usar a imagem oficial do Node-RED como base
-FROM nodered/node-red:latest
+FROM nodered/node-red:4.0.9
 
-# Copiar o package.json e flows.json para o diretório de trabalho do Node-RED
+# Copia os arquivos de dependências
 COPY package.json /data/
+RUN cd /data && npm install --only=production
+
+# Copia o flow pronto
 COPY flows.json /data/
-
-# Mudar para o diretório de trabalho
-WORKDIR /data
-
-# Instalar as dependências do projeto
-RUN npm install --unsafe-perm
-
-# Expor a porta 1880 (porta padrão do Node-RED)
-EXPOSE 1880
-
-# Comando para iniciar o Node-RED
-CMD ["npm", "start"]
+COPY flows_cred.json /data/
+COPY settings.js /data/settings.js
