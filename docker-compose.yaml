@@ -1,0 +1,16 @@
+version: '3'
+services:
+  node-red:
+    image: renatofleury/projeto_pcs3819:latest
+    container_name: node-red-bitcoin
+    restart: unless-stopped
+    ports:
+      - "1880:1880"
+    volumes:
+      - node_red_data:/data
+    environment:
+      - TZ=America/Sao_Paulo
+      - NODE_RED_ENABLE_PROJECTS=true
+
+volumes:
+  node_red_data:
