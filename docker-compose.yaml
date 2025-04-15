@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 services:
   node-red:
     image: renatofleury/projeto_pcs3819:latest
